@@ -18,6 +18,7 @@ import {useParams} from "react-router";
 import "../Page.css";
 import React, {useEffect, useState} from "react";
 import {add, close, pencil} from "ionicons/icons";
+import {searchCustomers} from "./CustomerAPI";
 
 const CustomerList: React.FC = () => {
 
@@ -31,20 +32,8 @@ const CustomerList: React.FC = () => {
 
 
 	const search = () => {
-		const sampleData = [{
-			id: 1,
-			firstName: "David",
-			lastName: "Salomon",
-			phone: "+50373512572",
-			address: "El Salvador"
-		}, {
-			id: 2,
-			firstName: "David",
-			lastName: "Martinez",
-			phone: "+50373512572",
-			address: "Canada"
-		}];
-		setCustomers(sampleData);
+		let result = searchCustomers();
+		setCustomers(result);
 	};
 
 	return (
@@ -97,7 +86,9 @@ const CustomerList: React.FC = () => {
 											<IonButton color = "primary" fill = "clear">
 												<IonIcon icon = {pencil} slot = "icon-only" />
 											</IonButton>
-											<IonButton color = "danger" fill = "clear">
+											<IonButton onClick = {() => console.log(customer.id)}
+																 color = "danger"
+																 fill = "clear">
 												<IonIcon icon = {close} slot = "icon-only" />
 											</IonButton>
 										</IonCol>
