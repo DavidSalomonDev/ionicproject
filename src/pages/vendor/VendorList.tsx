@@ -18,13 +18,13 @@ import { useHistory, useParams } from "react-router";
 import "../Page.css";
 import React, { useEffect, useState } from "react";
 import { add, close, pencil } from "ionicons/icons";
-import { removeCustomer, searchCustomers } from "./CustomerAPI";
-import Customer from "./Customer";
+import { removeVendor, searchVendors } from "./VendorAPI";
+import Vendor from "./Vendor";
 
-const CustomerList: React.FC = () => {
+const VendorList: React.FC = () => {
 
 	const { name } = useParams<{ name: string; }>();
-	const [customers, setCustomers] = useState<Customer[]>([]);
+	const [vendors, setVendors] = useState<Vendor[]>([]);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -32,21 +32,21 @@ const CustomerList: React.FC = () => {
 	}, []);
 
 	const search = () => {
-		let result = searchCustomers();
-		setCustomers(result);
+		let result = searchVendors();
+		setVendors(result);
 	};
 
 	const remove = (id: string) => {
-		removeCustomer(id);
+		removeVendor(id);
 		search();
 	};
 
-	const addCustomer = () => {
-		history.push("customer/new");
+	const addVendor = () => {
+		history.push("vendor/new");
 	};
 
-	const editCustomer = (id: string) => {
-		history.push("customer/" + id);
+	const editVendor = (id: string) => {
+		history.push("vendor/" + id);
 	};
 
 	return (
@@ -70,13 +70,13 @@ const CustomerList: React.FC = () => {
 				{/*//Grid start*/}
 				<IonContent>
 					<IonCard>
-						<IonTitle>Customer Management</IonTitle>
+						<IonTitle>Vendor Management</IonTitle>
 						<IonItem>
-							<IonButton onClick = {addCustomer} color = "primary"
+							<IonButton onClick = {addVendor} color = "primary"
 												 fill = "solid"
 												 slot = "end"
 												 size = "default">
-								<IonIcon icon = {add} /> Add customer
+								<IonIcon icon = {add} /> Add vendor
 							</IonButton>
 						</IonItem>
 						<IonGrid className = "table">
@@ -88,20 +88,20 @@ const CustomerList: React.FC = () => {
 								<IonCol>Actions</IonCol>
 							</IonRow>
 
-							{customers.map((customer: Customer) => {
+							{vendors.map((vendor: Vendor) => {
 								return (
-									<IonRow key = {customer.id}>
-										<IonCol>{customer.firstName} {customer.lastName}</IonCol>
-										<IonCol>{customer.email}</IonCol>
-										<IonCol>{customer.phone}</IonCol>
-										<IonCol>{customer.address}</IonCol>
+									<IonRow key = {vendor.id}>
+										<IonCol>{vendor.firstName} {vendor.lastName}</IonCol>
+										<IonCol>{vendor.email}</IonCol>
+										<IonCol>{vendor.phone}</IonCol>
+										<IonCol>{vendor.address}</IonCol>
 										<IonCol>
-											<IonButton onClick = {() => editCustomer(String(customer.id))}
+											<IonButton onClick = {() => editVendor(String(vendor.id))}
 																 color = "primary"
 																 fill = "clear">
 												<IonIcon icon = {pencil} slot = "icon-only" />
 											</IonButton>
-											<IonButton onClick = {() => remove(String(customer.id))}
+											<IonButton onClick = {() => remove(String(vendor.id))}
 																 color = "danger"
 																 fill = "clear">
 												<IonIcon icon = {close} slot = "icon-only" />
@@ -119,4 +119,4 @@ const CustomerList: React.FC = () => {
 	);
 };
 
-export default CustomerList;
+export default VendorList;

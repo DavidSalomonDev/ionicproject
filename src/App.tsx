@@ -1,6 +1,6 @@
-import {IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact} from "@ionic/react";
-import {IonReactRouter} from "@ionic/react-router";
-import {Redirect, Route} from "react-router-dom";
+import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Redirect, Route } from "react-router-dom";
 import Menu from "./components/Menu";
 //import Page from "./pages/Page";
 /* Core CSS required for Ionic components to work properly */
@@ -24,6 +24,11 @@ import "src/theme/variables.css";
 
 /* Pages */
 import CustomerList from "src/pages/customer/CustomerList";
+import CustomerEdit from "./pages/customer/CustomerEdit";
+import EmployeeEdit from "./pages/employee/EmployeeEdit";
+import EmployeeList from "./pages/employee/EmployeeList";
+import VendorList from "./pages/vendor/VendorList";
+import VendorEdit from "./pages/vendor/VendorEdit";
 
 setupIonicReact();
 
@@ -35,13 +40,28 @@ const App: React.FC = () => {
 					<Menu />
 					<IonRouterOutlet id = "main">
 						<Route path = "/" exact = {true}>
-							<Redirect to = "/page/Customers" />
+							<Redirect to = "/page/customers" />
 						</Route>
 						{/*						<Route path = "/page/:name" exact = {true}>
 						 <Page />
 						 </Route>*/}
-						<Route path = "/page/Customers" exact = {true}>
+						<Route path = "/page/customers" exact = {true}>
 							<CustomerList />
+						</Route>
+						<Route path = "/page/customer/:id" exact = {true}>
+							<CustomerEdit />
+						</Route>
+						<Route path = "/page/employees" exact = {true}>
+							<EmployeeList />
+						</Route>
+						<Route path = "/page/employee/:id" exact = {true}>
+							<EmployeeEdit />
+						</Route>
+						<Route path = "/page/vendors" exact = {true}>
+							<VendorList />
+						</Route>
+						<Route path = "/page/vendor/:id" exact = {true}>
+							<VendorEdit />
 						</Route>
 					</IonRouterOutlet>
 				</IonSplitPane>

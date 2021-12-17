@@ -18,13 +18,13 @@ import { useHistory, useParams } from "react-router";
 import "../Page.css";
 import React, { useEffect, useState } from "react";
 import { add, close, pencil } from "ionicons/icons";
-import { removeCustomer, searchCustomers } from "./CustomerAPI";
-import Customer from "./Customer";
+import { removeEmployee, searchEmployees } from "./EmployeeAPI";
+import Employee from "./Employee";
 
-const CustomerList: React.FC = () => {
+const EmployeeList: React.FC = () => {
 
 	const { name } = useParams<{ name: string; }>();
-	const [customers, setCustomers] = useState<Customer[]>([]);
+	const [employees, setEmployees] = useState<Employee[]>([]);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -32,21 +32,21 @@ const CustomerList: React.FC = () => {
 	}, []);
 
 	const search = () => {
-		let result = searchCustomers();
-		setCustomers(result);
+		let result = searchEmployees();
+		setEmployees(result);
 	};
 
 	const remove = (id: string) => {
-		removeCustomer(id);
+		removeEmployee(id);
 		search();
 	};
 
-	const addCustomer = () => {
-		history.push("customer/new");
+	const addEmployee = () => {
+		history.push("employee/new");
 	};
 
-	const editCustomer = (id: string) => {
-		history.push("customer/" + id);
+	const editEmployee = (id: string) => {
+		history.push("employee/" + id);
 	};
 
 	return (
@@ -70,13 +70,13 @@ const CustomerList: React.FC = () => {
 				{/*//Grid start*/}
 				<IonContent>
 					<IonCard>
-						<IonTitle>Customer Management</IonTitle>
+						<IonTitle>Employee Management</IonTitle>
 						<IonItem>
-							<IonButton onClick = {addCustomer} color = "primary"
+							<IonButton onClick = {addEmployee} color = "primary"
 												 fill = "solid"
 												 slot = "end"
 												 size = "default">
-								<IonIcon icon = {add} /> Add customer
+								<IonIcon icon = {add} /> Add employee
 							</IonButton>
 						</IonItem>
 						<IonGrid className = "table">
@@ -88,20 +88,20 @@ const CustomerList: React.FC = () => {
 								<IonCol>Actions</IonCol>
 							</IonRow>
 
-							{customers.map((customer: Customer) => {
+							{employees.map((employee: Employee) => {
 								return (
-									<IonRow key = {customer.id}>
-										<IonCol>{customer.firstName} {customer.lastName}</IonCol>
-										<IonCol>{customer.email}</IonCol>
-										<IonCol>{customer.phone}</IonCol>
-										<IonCol>{customer.address}</IonCol>
+									<IonRow key = {employee.id}>
+										<IonCol>{employee.firstName} {employee.lastName}</IonCol>
+										<IonCol>{employee.email}</IonCol>
+										<IonCol>{employee.phone}</IonCol>
+										<IonCol>{employee.address}</IonCol>
 										<IonCol>
-											<IonButton onClick = {() => editCustomer(String(customer.id))}
+											<IonButton onClick = {() => editEmployee(String(employee.id))}
 																 color = "primary"
 																 fill = "clear">
 												<IonIcon icon = {pencil} slot = "icon-only" />
 											</IonButton>
-											<IonButton onClick = {() => remove(String(customer.id))}
+											<IonButton onClick = {() => remove(String(employee.id))}
 																 color = "danger"
 																 fill = "clear">
 												<IonIcon icon = {close} slot = "icon-only" />
@@ -119,4 +119,4 @@ const CustomerList: React.FC = () => {
 	);
 };
 
-export default CustomerList;
+export default EmployeeList;
