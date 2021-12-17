@@ -1,8 +1,9 @@
 export default interface Vendor {
 	id?: string,
-	firstName?: string,
-	lastName?: string,
+	name?: string,
 	email?: string,
 	phone?: string,
-	address?: string
+	address?: string,
+	web?: string,
+	contact?: string
 }

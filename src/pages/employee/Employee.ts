@@ -4,5 +4,6 @@ export default interface Employee {
 	lastName?: string,
 	email?: string,
 	phone?: string,
-	address?: string
+	address?: string,
+	salary?: number
 }

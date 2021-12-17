@@ -40,7 +40,7 @@ const EmployeeEdit: React.FC = () => {
 
 	useEffect(() => {
 		search();
-	}, [history.location.pathname]);
+	}, [search, history.location.pathname]);
 
 
 	const save = () => {
@@ -109,6 +109,15 @@ const EmployeeEdit: React.FC = () => {
 									<IonLabel position = "stacked">Address</IonLabel>
 									<IonInput onIonChange = {e => employee.address = String(e.detail.value)}
 														value = {employee.address}> </IonInput>
+								</IonItem>
+							</IonCol>
+						</IonRow>
+						<IonRow>
+							<IonCol>
+								<IonItem>
+									<IonLabel position = "stacked">Salary</IonLabel>
+									<IonInput onIonChange = {e => employee.salary = Number(e.detail.value)}
+														value = {employee.salary}> </IonInput>
 								</IonItem>
 							</IonCol>
 						</IonRow>

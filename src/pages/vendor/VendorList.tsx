@@ -84,17 +84,17 @@ const VendorList: React.FC = () => {
 								<IonCol>Name</IonCol>
 								<IonCol>Email</IonCol>
 								<IonCol>Phone</IonCol>
-								<IonCol>Address</IonCol>
+								<IonCol>Web</IonCol>
 								<IonCol>Actions</IonCol>
 							</IonRow>
 
 							{vendors.map((vendor: Vendor) => {
 								return (
 									<IonRow key = {vendor.id}>
-										<IonCol>{vendor.firstName} {vendor.lastName}</IonCol>
+										<IonCol>{vendor.name} {vendor.name}</IonCol>
 										<IonCol>{vendor.email}</IonCol>
 										<IonCol>{vendor.phone}</IonCol>
-										<IonCol>{vendor.address}</IonCol>
+										<IonCol>{vendor.web}</IonCol>
 										<IonCol>
 											<IonButton onClick = {() => editVendor(String(vendor.id))}
 																 color = "primary"

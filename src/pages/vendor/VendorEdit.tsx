@@ -40,7 +40,7 @@ const VendorEdit: React.FC = () => {
 
 	useEffect(() => {
 		search();
-	}, [history.location.pathname]);
+	}, [search, history.location.pathname]);
 
 
 	const save = () => {
@@ -74,16 +74,16 @@ const VendorEdit: React.FC = () => {
 						<IonRow>
 							<IonCol>
 								<IonItem>
-									<IonLabel position = "stacked">First Name</IonLabel>
-									<IonInput onIonChange = {e => vendor.firstName = String(e.detail.value)}
-														value = {vendor.firstName}> </IonInput>
+									<IonLabel position = "stacked">Name</IonLabel>
+									<IonInput onIonChange = {e => vendor.name = String(e.detail.value)}
+														value = {vendor.name}> </IonInput>
 								</IonItem>
 							</IonCol>
 							<IonCol>
 								<IonItem>
-									<IonLabel position = "stacked">Last Name</IonLabel>
-									<IonInput onIonChange = {e => vendor.lastName = String(e.detail.value)}
-														value = {vendor.lastName}> </IonInput>
+									<IonLabel position = "stacked">Contact</IonLabel>
+									<IonInput onIonChange = {e => vendor.contact = String(e.detail.value)}
+														value = {vendor.contact}> </IonInput>
 								</IonItem>
 							</IonCol>
 						</IonRow>
@@ -109,6 +109,15 @@ const VendorEdit: React.FC = () => {
 									<IonLabel position = "stacked">Address</IonLabel>
 									<IonInput onIonChange = {e => vendor.address = String(e.detail.value)}
 														value = {vendor.address}> </IonInput>
+								</IonItem>
+							</IonCol>
+						</IonRow>
+						<IonRow>
+							<IonCol>
+								<IonItem>
+									<IonLabel position = "stacked">Web</IonLabel>
+									<IonInput onIonChange = {e => vendor.web = String(e.detail.value)}
+														value = {vendor.web}> </IonInput>
 								</IonItem>
 							</IonCol>
 						</IonRow>

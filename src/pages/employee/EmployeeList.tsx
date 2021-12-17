@@ -84,7 +84,7 @@ const EmployeeList: React.FC = () => {
 								<IonCol>Name</IonCol>
 								<IonCol>Email</IonCol>
 								<IonCol>Phone</IonCol>
-								<IonCol>Address</IonCol>
+								<IonCol>Salary</IonCol>
 								<IonCol>Actions</IonCol>
 							</IonRow>
 
@@ -94,7 +94,7 @@ const EmployeeList: React.FC = () => {
 										<IonCol>{employee.firstName} {employee.lastName}</IonCol>
 										<IonCol>{employee.email}</IonCol>
 										<IonCol>{employee.phone}</IonCol>
-										<IonCol>{employee.address}</IonCol>
+										<IonCol>{employee.salary}</IonCol>
 										<IonCol>
 											<IonButton onClick = {() => editEmployee(String(employee.id))}
 																 color = "primary"
