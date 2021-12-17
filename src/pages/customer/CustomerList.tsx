@@ -27,17 +27,18 @@ const CustomerList: React.FC = () => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
 	const history = useHistory();
 
-	useEffect(() => {
-		search();
-	}, []);
-
-	const search = () => {
-		let result = searchCustomers();
+	const search = async () => {
+		let result = await searchCustomers();
 		setCustomers(result);
 	};
 
-	const remove = (id: string) => {
-		removeCustomer(id);
+	useEffect(() => {
+		search();
+	}, [history.location.pathname]);
+
+
+	const remove = async (id: string) => {
+		await removeCustomer(id);
 		search();
 	};
 

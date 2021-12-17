@@ -27,17 +27,18 @@ const EmployeeList: React.FC = () => {
 	const [employees, setEmployees] = useState<Employee[]>([]);
 	const history = useHistory();
 
-	useEffect(() => {
-		search();
-	}, []);
-
-	const search = () => {
-		let result = searchEmployees();
+	const search = async () => {
+		let result = await searchEmployees();
 		setEmployees(result);
 	};
 
-	const remove = (id: string) => {
-		removeEmployee(id);
+	useEffect(() => {
+		search();
+	}, [history.location.pathname]);
+
+
+	const remove = async (id: string) => {
+		await removeEmployee(id);
 		search();
 	};
 

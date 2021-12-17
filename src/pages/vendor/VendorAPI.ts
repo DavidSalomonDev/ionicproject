@@ -1,34 +1,44 @@
 import Vendor from "./Vendor";
 
-export function searchVendors() {
-	if (!localStorage["vendors"]) {
-		localStorage["vendors"] = "[]";
-	}
-	let vendors = localStorage["vendors"];
-	vendors = JSON.parse(vendors);
-	return vendors;
+export async function searchVendors() {
+	let url = process.env.REACT_APP_API + "vendors";
+	let response = await fetch(url, {
+		"method": "GET",
+		"headers": {
+			"Content-Type": "application/json"
+		}
+	});
+	return await response.json();
 }
 
-export function removeVendor(id: string) {
-	let vendors = searchVendors();
-	let indexId = vendors.findIndex((vendor: Vendor) => vendor.id === id);
-	vendors.splice(indexId, 1);
-	localStorage["vendors"] = JSON.stringify(vendors);
+export async function removeVendor(id: string) {
+	let url = process.env.REACT_APP_API + "vendors/" + id;
+	await fetch(url, {
+		"method": "DELETE",
+		"headers": {
+			"Content-Type": "application/json"
+		}
+	});
 }
 
-export function saveVendor(vendor: Vendor) {
-	let vendors = searchVendors();
-	if (vendor.id) {
-		let indexId = vendors.findIndex((c: Vendor) => c.id === vendor.id);
-		vendors[indexId] = vendor;
-	} else {
-		vendor.id = String(Math.round(Math.random() * 1000000));
-		vendors.push(vendor);
-	}
-	localStorage["vendors"] = JSON.stringify(vendors);
+export async function saveVendor(vendor: Vendor) {
+	let url = process.env.REACT_APP_API + "vendors";
+	await fetch(url, {
+		"method": "POST",
+		"body": JSON.stringify(vendor),
+		"headers": {
+			"Content-Type": "application/json"
+		}
+	});
 }
 
-export function searchVendorById(id: string) {
-	let vendors = searchVendors();
-	return vendors.find((vendor: any) => vendor.id === id);
+export async function searchVendorById(id: string) {
+	let url = process.env.REACT_APP_API + "vendors/" + id;
+	let response = await fetch(url, {
+		"method": "GET",
+		"headers": {
+			"Content-Type": "application/json"
+		}
+	});
+	return await response.json();
 }

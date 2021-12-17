@@ -27,17 +27,18 @@ const VendorList: React.FC = () => {
 	const [vendors, setVendors] = useState<Vendor[]>([]);
 	const history = useHistory();
 
-	useEffect(() => {
-		search();
-	}, []);
-
-	const search = () => {
-		let result = searchVendors();
+	const search = async () => {
+		let result = await searchVendors();
 		setVendors(result);
 	};
 
-	const remove = (id: string) => {
-		removeVendor(id);
+	useEffect(() => {
+		search();
+	}, [history.location.pathname]);
+
+
+	const remove = async (id: string) => {
+		await removeVendor(id);
 		search();
 	};
 

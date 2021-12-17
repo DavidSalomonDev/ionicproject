@@ -15,7 +15,7 @@ import {
 	IonTitle,
 	IonToolbar
 } from "@ionic/react";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import "../Page.css";
 import React, { useEffect, useState } from "react";
 import { checkmark } from "ionicons/icons";
@@ -24,30 +24,31 @@ import Vendor from "./Vendor";
 
 const VendorEdit: React.FC = () => {
 
-	const { name, id } = useParams<{ name: string; id: string }>();
-	const history = useHistory();
+	const { name } = useParams<{ name: string; id: string }>();
 
 	const [vendor, setVendor] = useState<Vendor>({});
+	const history = useHistory();
 
-	const search = () => {
+	const routeMatch: any = useRouteMatch("/page/vendor/:id");
+	let id = routeMatch?.params?.id;
+
+	useEffect(() => {
+		search();
+	}, [history.location.pathname]);
+
+	const search = async () => {
 		if (id === "new") {
 			setVendor({});
 		} else {
-			let result = searchVendorById(id);
+			let result = await searchVendorById(id);
 			setVendor(result);
 		}
 	};
 
-	useEffect(() => {
-		search();
-	}, [search, history.location.pathname]);
-
-
-	const save = () => {
-		saveVendor(vendor);
+	const save = async () => {
+		await saveVendor(vendor);
 		history.push("/page/vendors");
 	};
-
 
 	return (
 		<IonPage>
